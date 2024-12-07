@@ -27,34 +27,25 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  double left = 0;
+  double height = 100;
+  double width = 100;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Animation')),
-      body: GestureDetector(
-        onTap: () {
-          setState(() {
-            left = 200;
-          });
-        },
-        child: Stack(
-          children: [
-            Container(height: 600, color: Colors.red),
-            AnimatedPositionedDirectional(
-                duration: const Duration(seconds: 2),
-                curve: Curves.easeIn,
-                start: left,
-                top: left,
-                child: Container(
-                  height: 200,
-                  width: 200,
-                  color: Colors.green,
-                )),
-          ],
-        ),
-      ),
+      body: InkWell(
+          onTap: () {
+            setState(() {
+              height = 200;
+              width = 200;
+            });
+          },
+          child: AnimatedSize(
+            curve: Curves.easeIn,
+              duration: const Duration(seconds: 1),
+              child:
+                  Container(height: height, width: width, color: Colors.blue))),
     );
   }
 }
