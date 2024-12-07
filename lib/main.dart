@@ -48,10 +48,11 @@ class _HomeViewState extends State<HomeView> {
             },
             child: Center(
               child: AnimatedContainer(
+                curve: Curves.easeIn,
                   decoration: BoxDecoration(
                       color: color,
                       borderRadius: BorderRadius.circular(borderRadius)),
-                  duration: const Duration(milliseconds: 500),
+                  duration: const Duration(seconds: 4),
                   height: height,
                   width: width),
             ),
