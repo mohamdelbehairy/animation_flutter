@@ -27,10 +27,8 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  double height = 200;
-  double width = 200;
-  double borderRadius = 0;
-  Color color = Colors.red;
+  double opacity = 1;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,21 +38,15 @@ class _HomeViewState extends State<HomeView> {
           InkWell(
             onTap: () {
               setState(() {
-                height = 400;
-                width = 400;
-                borderRadius = 100;
-                color = Colors.blue;
+                opacity = 0.5;
               });
             },
             child: Center(
-              child: AnimatedContainer(
-                curve: Curves.easeIn,
-                  decoration: BoxDecoration(
-                      color: color,
-                      borderRadius: BorderRadius.circular(borderRadius)),
-                  duration: const Duration(seconds: 4),
-                  height: height,
-                  width: width),
+              child: AnimatedOpacity(
+                opacity: opacity,
+                duration: const Duration(seconds: 1),
+                child: Container(height: 200, width: 200, color: Colors.red),
+              ),
             ),
           )
         ],
