@@ -27,9 +27,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  double elvation = 0.0;
-  Color shadowColor = Colors.red;
-  Color color = Colors.red;
+  double padding = 10;
 
   @override
   Widget build(BuildContext context) {
@@ -41,23 +39,22 @@ class _HomeViewState extends State<HomeView> {
             onTap: () {
               setState(() {
                 setState(() {
-                  elvation = 20;
-                  shadowColor = Colors.black;
-                  color = Colors.blue;
+                  padding = 40;
                 });
               });
             },
-            child: Center(
-              child: AnimatedPhysicalModel(
-                  color: color,
-                  shape: BoxShape.circle,
-                  elevation: elvation,
-                  shadowColor: shadowColor,
-                  duration: const Duration(seconds: 2),
-                  child: Container(
-                      height: 400,
-                      alignment: Alignment.center,
-                      child: const Text('Mohamed'))),
+            child: Container(
+              height: 200,
+              color: Colors.red,
+              child: AnimatedPadding(
+                curve: Curves.easeIn,
+                duration: const Duration(seconds: 1),
+                padding:  EdgeInsets.all(padding),
+                child: Container(
+                  height: 200,
+                  color: Colors.green,
+                ),
+              ),
             ),
           )
         ],
