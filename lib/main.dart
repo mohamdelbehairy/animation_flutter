@@ -10,22 +10,54 @@ class Animation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(  
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: false),
       home: const HomeView(),
     );
   }
 }
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
 
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  double height = 200;
+  double width = 200;
+  double borderRadius = 0;
+  Color color = Colors.red;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Animation')),
+      body: ListView(
+        children: [
+          InkWell(
+            onTap: () {
+              setState(() {
+                height = 400;
+                width = 400;
+                borderRadius = 100;
+                color = Colors.blue;
+              });
+            },
+            child: Center(
+              child: AnimatedContainer(
+                  decoration: BoxDecoration(
+                      color: color,
+                      borderRadius: BorderRadius.circular(borderRadius)),
+                  duration: const Duration(milliseconds: 500),
+                  height: height,
+                  width: width),
+            ),
+          )
+        ],
+      ),
     );
   }
 }
