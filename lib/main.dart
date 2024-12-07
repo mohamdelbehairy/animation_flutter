@@ -42,10 +42,11 @@ class _HomeViewState extends State<HomeView> {
         child: Stack(
           children: [
             Container(height: 600, color: Colors.red),
-            AnimatedPositioned(
+            AnimatedPositionedDirectional(
                 duration: const Duration(seconds: 2),
                 curve: Curves.easeIn,
-                left: left,
+                start: left,
+                top: left,
                 child: Container(
                   height: 200,
                   width: 200,
