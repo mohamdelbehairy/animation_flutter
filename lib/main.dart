@@ -27,37 +27,32 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  double padding = 10;
+  double left = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Animation')),
-      body: ListView(
-        children: [
-          InkWell(
-            onTap: () {
-              setState(() {
-                setState(() {
-                  padding = 40;
-                });
-              });
-            },
-            child: Container(
-              height: 200,
-              color: Colors.red,
-              child: AnimatedPadding(
+      body: GestureDetector(
+        onTap: () {
+          setState(() {
+            left = 200;
+          });
+        },
+        child: Stack(
+          children: [
+            Container(height: 600, color: Colors.red),
+            AnimatedPositioned(
+                duration: const Duration(seconds: 2),
                 curve: Curves.easeIn,
-                duration: const Duration(seconds: 1),
-                padding:  EdgeInsets.all(padding),
+                left: left,
                 child: Container(
                   height: 200,
+                  width: 200,
                   color: Colors.green,
-                ),
-              ),
-            ),
-          )
-        ],
+                )),
+          ],
+        ),
       ),
     );
   }
