@@ -27,8 +27,9 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  double fontSize = 15;
-  Color color = Colors.black;
+  double elvation = 0.0;
+  Color shadowColor = Colors.red;
+  Color color = Colors.red;
 
   @override
   Widget build(BuildContext context) {
@@ -39,16 +40,24 @@ class _HomeViewState extends State<HomeView> {
           InkWell(
             onTap: () {
               setState(() {
-                fontSize = 30;
-                color = Colors.red;
+                setState(() {
+                  elvation = 20;
+                  shadowColor = Colors.black;
+                  color = Colors.blue;
+                });
               });
             },
             child: Center(
-              child: AnimatedDefaultTextStyle(
-                  curve: Curves.easeIn,
-                  style: TextStyle(fontSize: fontSize, color: color),
+              child: AnimatedPhysicalModel(
+                  color: color,
+                  shape: BoxShape.circle,
+                  elevation: elvation,
+                  shadowColor: shadowColor,
                   duration: const Duration(seconds: 2),
-                  child: const Text("Mohamed Elbehairy")),
+                  child: Container(
+                      height: 400,
+                      alignment: Alignment.center,
+                      child: const Text('Mohamed'))),
             ),
           )
         ],
