@@ -27,7 +27,8 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  double opacity = 1;
+  double fontSize = 15;
+  Color color = Colors.black;
 
   @override
   Widget build(BuildContext context) {
@@ -38,15 +39,16 @@ class _HomeViewState extends State<HomeView> {
           InkWell(
             onTap: () {
               setState(() {
-                opacity = 0.5;
+                fontSize = 30;
+                color = Colors.red;
               });
             },
             child: Center(
-              child: AnimatedOpacity(
-                opacity: opacity,
-                duration: const Duration(seconds: 1),
-                child: Container(height: 200, width: 200, color: Colors.red),
-              ),
+              child: AnimatedDefaultTextStyle(
+                  curve: Curves.easeIn,
+                  style: TextStyle(fontSize: fontSize, color: color),
+                  duration: const Duration(seconds: 2),
+                  child: const Text("Mohamed Elbehairy")),
             ),
           )
         ],
