@@ -27,8 +27,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  double height = 100;
-  double width = 100;
+  AlignmentGeometry alignment = Alignment.topLeft;
 
   @override
   Widget build(BuildContext context) {
@@ -37,15 +36,14 @@ class _HomeViewState extends State<HomeView> {
       body: InkWell(
           onTap: () {
             setState(() {
-              height = 200;
-              width = 200;
+              alignment = Alignment.center;
             });
           },
-          child: AnimatedSize(
-            curve: Curves.easeIn,
+          child: AnimatedAlign(
+              alignment: alignment,
+              curve: Curves.easeIn,
               duration: const Duration(seconds: 1),
-              child:
-                  Container(height: height, width: width, color: Colors.blue))),
+              child: Container(height: 200, width: 200, color: Colors.blue))),
     );
   }
 }
