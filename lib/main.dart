@@ -19,31 +19,49 @@ class Animation extends StatelessWidget {
   }
 }
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
+
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+
+  @override
+  void initState() {
+    _animationController = AnimationController(
+        vsync: this,
+        lowerBound: 100,
+        upperBound: 300,
+        duration: const Duration(seconds: 3));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Animation')),
-      body: TweenAnimationBuilder(
-        duration: const Duration(seconds: 1),
-        curve: Curves.easeIn,
-        // tween: Tween<double>(begin: 100, end: 200),
-        // tween: ColorTween(begin: Colors.green, end: Colors.red),
-        tween: TextStyleTween(
-            begin: const TextStyle(
-                color: Colors.red,
-                fontSize: 16,
-                fontWeight: FontWeight.w500),
-            end: const TextStyle(
-                color: Colors.green,
-                fontSize: 24,
-                fontWeight: FontWeight.bold)),
-        builder: (BuildContext context, value, child) {
-          // return Container(height: 200, width: 200, color: value);
-          return Text("Mohamed Elbehairy", style: value);
+      body: InkWell(
+        onTap: () {
+          _animationController.forward(); // play animation
         },
+        child: AnimatedBuilder(
+            animation: _animationController,
+            builder: (context, child) {
+              return Container(
+                height: _animationController.value, // 100 => 300
+                width: _animationController.value, // 100 => 300
+                color: Colors.red,
+                child: Text("Mohamed",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: _animationController.value / 10, // 10 => 30
+                    )),
+              );
+            }),
       ),
     );
   }
