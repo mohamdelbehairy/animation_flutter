@@ -19,31 +19,32 @@ class Animation extends StatelessWidget {
   }
 }
 
-class HomeView extends StatefulWidget {
+class HomeView extends StatelessWidget {
   const HomeView({super.key});
-
-  @override
-  State<HomeView> createState() => _HomeViewState();
-}
-
-class _HomeViewState extends State<HomeView> {
-  AlignmentGeometry alignment = Alignment.topLeft;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Animation')),
-      body: InkWell(
-          onTap: () {
-            setState(() {
-              alignment = Alignment.center;
-            });
-          },
-          child: AnimatedAlign(
-              alignment: alignment,
-              curve: Curves.easeIn,
-              duration: const Duration(seconds: 1),
-              child: Container(height: 200, width: 200, color: Colors.blue))),
+      body: TweenAnimationBuilder(
+        duration: const Duration(seconds: 1),
+        curve: Curves.easeIn,
+        // tween: Tween<double>(begin: 100, end: 200),
+        // tween: ColorTween(begin: Colors.green, end: Colors.red),
+        tween: TextStyleTween(
+            begin: const TextStyle(
+                color: Colors.red,
+                fontSize: 16,
+                fontWeight: FontWeight.w500),
+            end: const TextStyle(
+                color: Colors.green,
+                fontSize: 24,
+                fontWeight: FontWeight.bold)),
+        builder: (BuildContext context, value, child) {
+          // return Container(height: 200, width: 200, color: value);
+          return Text("Mohamed Elbehairy", style: value);
+        },
+      ),
     );
   }
 }
