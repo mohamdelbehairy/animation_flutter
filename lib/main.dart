@@ -44,24 +44,54 @@ class _HomeViewState extends State<HomeView>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Animation')),
-      body: InkWell(
-        onTap: () {
-          _animationController.forward(); // play animation
-        },
-        child: AnimatedBuilder(
-            animation: _animationController,
-            builder: (context, child) {
-              return Container(
-                height: _animationController.value, // 100 => 300
-                width: _animationController.value, // 100 => 300
-                color: Colors.red,
-                child: Text("Mohamed",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: _animationController.value / 10, // 10 => 30
-                    )),
-              );
-            }),
+      body: Column(
+        children: [
+          AnimatedBuilder(
+              animation: _animationController,
+              child: Text("Mohamed",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: _animationController.value / 10, // 10 => 30
+                  )),
+              builder: (context, child) {
+                return Container(
+                  height: _animationController.value, // 100 => 300
+                  width: _animationController.value, // 100 => 300
+                  color: Colors.red,
+                  child: Center(child: child),
+                );
+              }),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ElevatedButton(
+                  onPressed: () {
+                    _animationController.forward();
+                  },
+                  child: const Text("Forward")),
+              ElevatedButton(
+                  onPressed: () {
+                    _animationController.reverse();
+                  },
+                  child: const Text("Reverse")),
+              ElevatedButton(
+                  onPressed: () {
+                    _animationController.stop();
+                  },
+                  child: const Text("Stop")),
+              ElevatedButton(
+                  onPressed: () {
+                    _animationController.repeat();
+                  },
+                  child: const Text("Repeat")),
+              ElevatedButton(
+                  onPressed: () {
+                    _animationController.reset();
+                  },
+                  child: const Text("Reset")),
+            ],
+          )
+        ],
       ),
     );
   }
